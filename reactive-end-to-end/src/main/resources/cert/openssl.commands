@@ -1,0 +1,9 @@
+############ Create Private & Public RAS keys ############
+openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048
+openssl rsa -pubout -in private_key.pem -out public_key.pem
+
+############ Create DER format files ############
+openssl pkcs8 -topk8 -nocrypt -in private_key.pem -outform der -out private_key.der
+openssl pkey -in input.pem -pubout -outform der -out public.der
+
+https://knowledge.digicert.com/solution/SO26449.html#:~:text=Note%3A%20The%20PEM%20format%20is,binary%20form%20of%20the%20certificate.
